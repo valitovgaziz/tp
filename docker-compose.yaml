@@ -26,6 +26,7 @@ services:
       - .:/usr/src/app
     depends_on:
       - db
+    command: ./bin/api.exe
 
 volumes:
   postgres-db:
