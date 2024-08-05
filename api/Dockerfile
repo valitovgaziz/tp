@@ -8,4 +8,6 @@ RUN go mod tidy
 
 RUN go build -o bin/api.exe cmd/main.go
 
+RUN 
+
 ENTRYPOINT [ "bin/api.exe" ]

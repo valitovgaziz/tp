@@ -25,6 +25,7 @@ require (
 
 require (
 	github.com/fatih/color v1.17.0 // indirect
+	github.com/google/uuid v1.6.0
 	github.com/ilyakaznacheev/cleanenv v1.5.0
 	github.com/jinzhu/gorm v1.9.16
 	github.com/mattn/go-colorable v0.1.13 // indirect
