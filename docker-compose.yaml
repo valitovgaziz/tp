@@ -4,10 +4,6 @@ services:
     image: postgres:16
     env_file:
       - .env
-    environment:
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
-      - POSTGRES_DB=${DB_NAME}
     ports:
       - "${DB_PORT}:${DB_PORT}"
     volumes:
@@ -27,6 +23,14 @@ services:
     depends_on:
       - db
     command: ./bin/api.exe
+
+  migrator:
+    build: ./migrator
+    env_file:
+      - .env
+    ports:
+      - "${MIGRATOR_PORT}:${MIGRATOR_PORT}"
+    command: "goose -dir ./migratios postgres 'user=postgres dbname=postgres sslmode=disable' up"
 
 volumes:
   postgres-db:
