@@ -30,7 +30,6 @@ services:
       - .env
     ports:
       - "${MIGRATOR_PORT}:${MIGRATOR_PORT}"
-    command: "goose -dir ./migratios postgres 'user=postgres dbname=postgres sslmode=disable' up"
 
 volumes:
   postgres-db:
