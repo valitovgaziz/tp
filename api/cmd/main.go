@@ -11,7 +11,8 @@ var PSQLCnf configs.PSQLConfig
 
 func main() {
 	slog.Info("Start")
-	initializers.InitDBconnection()
 	initializers.InitChiRouting()
+	initializers.InitDBconnection()
+	slog.Info("server is closed", "info", <-initializers.Done)
 	slog.Info("End")
 }

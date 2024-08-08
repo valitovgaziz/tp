@@ -16,6 +16,9 @@ import (
 	"github.com/go-chi/chi/v5/middleware"
 )
 
+
+var Done = make(chan bool)
+
 func InitDBconnection() {
 	slog.Info("Init DB connection")
 	dsn := fmt.Sprintf(
@@ -45,7 +48,6 @@ func InitDBconnection() {
 		os.Exit(2)
 	}
 	slog.Info("connected to database")
-	db.Logger = logger.Default.LogMode(logger.Info)
 }
 
 func InitChiRouting() {
@@ -55,11 +57,13 @@ func InitChiRouting() {
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("welcome developer! Cool."))
 	})
-	err := http.ListenAndServe(":"+os.Getenv("SERVER_PORT"), r)
-	if err != nil {
-		slog.Info("failed to start server")
-		slog.Error("failed to start server", "error", err)
-		os.Exit(2)
-	}
-	slog.Info("Server start on PORT: " + os.Getenv("SERVER_PORT"))
+
+	// up server on os.Getenv("SERVER_PORT") port on gorutin
+	go func() {
+		defer close(Done)
+		err := http.ListenAndServe(":"+os.Getenv("SERVER_PORT"), r)
+		if err != nil {
+			slog.Error("Can't start server: ", "error", err)
+		}
+	}()
 }
