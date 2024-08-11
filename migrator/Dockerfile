@@ -1,11 +1,9 @@
-FROM golang:1.22.5
+FROM golang:latest
 
 WORKDIR /app
 
-COPY migrations/* app/migrations/
+COPY . .
 
-COPY go.mod app/
+RUN go mod tidy
 
 RUN go install github.com/pressly/goose/v3/cmd/goose@latest
-
-CMD ["goose", "-dir=/app/migrations", "user=${DB_USER}", "dbname=${DB_NAME}", "sslmode=${SSLmode}" "up"]

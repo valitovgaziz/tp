@@ -5,10 +5,13 @@ services:
     env_file:
       - .env
     ports:
-      - "${DB_PORT}:${DB_PORT}"
+      - "${PGPORT}:${PGPORT}"
     volumes:
       - postgres-db:/var/lib/postgresql/data
-
+    environment:
+      - POSTGRES_USER=${PGUSER}
+      - POSTGRES_PASSWORD=${PGPASSWORD}
+      - POSTGRES_DB=${PGDATABASE}
     
   api:
     build:
@@ -25,11 +28,21 @@ services:
     command: ./bin/api.exe
 
   migrator:
-    build: ./migrator
+    build:
+      context: ./migrator
+      dockerfile: Dockerfile
     env_file:
       - .env
-    ports:
-      - "${MIGRATOR_PORT}:${MIGRATOR_PORT}"
+    depends_on:
+      - api
+      - db
+    volumes:
+      - goose:/migrations
+    environment:
+      - GOOSE_DRIVER=${GOOSE_DRIVER}
+      - GOOSE_DBSTRING=${GOOSE_DBSTRING}
+    command: goose up
 
 volumes:
   postgres-db:
+  goose:
