@@ -18,7 +18,6 @@ import (
 	"github.com/go-chi/chi/v5/middleware"
 )
 
-
 var Done = make(chan bool)
 
 func InitDBconnection() {
@@ -56,7 +55,7 @@ func InitChiRouting() {
 	slog.Info("Init routing")
 	r := chi.NewRouter()
 
-	// middlewares 
+	// middlewares
 	r.Use(middleware.Logger)
 	r.Use(middleware.Timeout(60 * time.Second))
 	r.Use(middleware.RequestID)
@@ -71,7 +70,7 @@ func InitChiRouting() {
 
 	r.Route("/auth", func(r chi.Router) {
 		r.Post("/register", auth.Register)
-		r.Post("/loging", auth.Login)
+		r.Post("/login", auth.Login)
 	})
 
 	// up server on os.Getenv("SERVER_PORT") port on gorutin
