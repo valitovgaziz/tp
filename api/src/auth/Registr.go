@@ -23,7 +23,12 @@ func Register(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
-	user := models.User{Email: Crenetials.Email, Password: hashedPassword}
+	user := models.User{
+		Name: Crenetials.Name,
+		Email: Crenetials.Email,
+		Password: hashedPassword,
+		Phone: Crenetials.Phone,
+	}
 	if result := psql.PSQL_GORM_DB.Create(&user); result.Error != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
@@ -34,13 +39,4 @@ func Register(w http.ResponseWriter, r *http.Request) {
 func hashPassword(password string) (string, error) {
     bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
     return string(bytes), err
-}
-
-func checkPasswordHash(password, hash string) bool {
-    err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
-    return err == nil
-}
-
-func Login(w http.ResponseWriter, r *http.Request) {
-
 }
