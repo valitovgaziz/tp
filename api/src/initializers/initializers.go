@@ -1,6 +1,7 @@
 package initializers
 
 import (
+	"api/src/auth"
 	"api/src/storages/psql"
 	"fmt"
 	"log/slog"
@@ -66,6 +67,11 @@ func InitChiRouting() {
 
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("welcome developer! Cool."))
+	})
+
+	r.Route("/auth", func(r chi.Router) {
+		r.Post("/register", auth.Register)
+		r.Post("/loging", auth.Login)
 	})
 
 	// up server on os.Getenv("SERVER_PORT") port on gorutin
