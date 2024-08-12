@@ -4,10 +4,12 @@ import (
 	"api/src/configs"
 	"api/src/initializers"
 	"log/slog"
+	"os"
 )
 
 var APIServerCnf configs.APIserver
 var PSQLCnf configs.PSQLConfig
+var SecretKey = []byte(os.Getenv("SECRET_KEY"))
 
 func main() {
 	slog.Info("Start")

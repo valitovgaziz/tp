@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log/slog"
 	"os"
+	"time"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -53,7 +54,16 @@ func InitDBconnection() {
 func InitChiRouting() {
 	slog.Info("Init routing")
 	r := chi.NewRouter()
+
+	// middlewares 
 	r.Use(middleware.Logger)
+	r.Use(middleware.Timeout(60 * time.Second))
+	r.Use(middleware.RequestID)
+	r.Use(middleware.CleanPath)
+	r.Use(middleware.Heartbeat("/ping"))
+	r.Use(middleware.NoCache)
+	r.Use(middleware.Recoverer)
+
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("welcome developer! Cool."))
 	})

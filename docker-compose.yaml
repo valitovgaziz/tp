@@ -38,9 +38,6 @@ services:
       - db
     volumes:
       - goose:/migrations
-    environment:
-      - GOOSE_DRIVER=${GOOSE_DRIVER}
-      - GOOSE_DBSTRING=${GOOSE_DBSTRING}
     command: goose up
 
 volumes:
