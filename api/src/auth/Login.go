@@ -48,6 +48,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		Value:   tokenString,
 		Expires: expirationtime,
 	})
+	w.WriteHeader(http.StatusOK)
 }
 
 func checkPasswordHash(password, hash string) bool {
