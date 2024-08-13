@@ -1,6 +1,7 @@
 package initializers
 
 import (
+	"api/src/admin"
 	"api/src/auth"
 	"log/slog"
 	"os"
@@ -32,9 +33,12 @@ func InitChiRouting() {
 	})
 
 	r.Post("/signin", auth.Register)
+	r.Get("/allusers", admin.GetAllUser)
 
 	r.Route("/auth", func(r chi.Router) {
-		r.Post("/register", auth.Register)
+		r.Route("/admin", func(r chi.Router) {
+			r.Get("/allUsers", admin.GetAllUser)
+		})
 		r.Post("/login", auth.Login)
 	})
 
