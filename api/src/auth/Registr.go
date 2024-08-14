@@ -6,6 +6,8 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/google/uuid"
+
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -23,11 +25,15 @@ func Register(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
+
+	id := uuid.New()
+
 	user := models.User{
-		Name: Crenetials.Name,
-		Email: Crenetials.Email,
+		Id:       id,
+		Name:     Crenetials.Name,
+		Email:    Crenetials.Email,
 		Password: hashedPassword,
-		Phone: Crenetials.Phone,
+		Phone:    Crenetials.Phone,
 	}
 	if result := psql.PSQL_GORM_DB.Create(&user); result.Error != nil {
 		w.WriteHeader(http.StatusInternalServerError)
@@ -37,6 +43,6 @@ func Register(w http.ResponseWriter, r *http.Request) {
 }
 
 func hashPassword(password string) (string, error) {
-    bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
-    return string(bytes), err
+	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
+	return string(bytes), err
 }
