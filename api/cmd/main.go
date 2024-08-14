@@ -7,6 +7,8 @@ import (
 	"os"
 )
 
+// TODO write the tests
+
 var APIServerCnf configs.APIserver
 var PSQLCnf configs.PSQLConfig
 var SecretKey = []byte(os.Getenv("SECRET_KEY"))
