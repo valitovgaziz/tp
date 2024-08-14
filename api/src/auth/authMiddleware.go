@@ -39,7 +39,6 @@ func AuthMiddleware(next http.Handler) http.Handler {
 			w.WriteHeader(http.StatusUnauthorized)
 			return
 		}
-
 		ctx := context.WithValue(r.Context(), "email", claims.Email)
 		next.ServeHTTP(w, r.WithContext(ctx))
 	})

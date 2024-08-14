@@ -22,7 +22,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	}
 	// check user
 	var user models.User
-	if result := psql.PSQL_GORM_DB.Where("username = ?", creds.Email).First(&user); result.Error != nil || !checkPasswordHash(creds.Password, user.Password) {
+	if result := psql.PSQL_GORM_DB.Where("email = ?", creds.Email).First(&user); result.Error != nil || !checkPasswordHash(creds.Password, user.Password) {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}

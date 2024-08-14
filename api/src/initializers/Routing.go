@@ -27,19 +27,26 @@ func InitChiRouting() {
 	r.Use(middleware.Heartbeat("/ping"))
 	r.Use(middleware.NoCache)
 	r.Use(middleware.Recoverer)
-
-	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("welcome developer! Cool."))
+	r.NotFound(func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(404)
+		w.Write([]byte("route does not exist"))
+	})
+	r.MethodNotAllowed(func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(405)
+		w.Write([]byte("method is not valid"))
 	})
 
-	r.Post("/signin", auth.Register)
-	r.Get("/allusers", admin.GetAllUser)
+	// public Routes
+	r.Group(func(r chi.Router) {
+		r.Post("/signup", auth.Register) // register
+		r.Post("/signin", auth.Login)     // signin
+	})
 
-	r.Route("/auth", func(r chi.Router) {
-		r.Route("/admin", func(r chi.Router) {
-			r.Get("/allUsers", admin.GetAllUser)
-		})
-		r.Post("/login", auth.Login)
+	// Private Routes
+	// Require Authentication
+	r.Group(func(r chi.Router) {
+		r.Use(auth.AuthMiddleware)
+		r.Get("/allUsers", admin.GetAllUser) // all users get
 	})
 
 	// up server on os.Getenv("SERVER_PORT") port on gorutin
