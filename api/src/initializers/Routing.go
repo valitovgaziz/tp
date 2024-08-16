@@ -1,8 +1,10 @@
 package initializers
 
 import (
-	"api/src/admin"
-	"api/src/auth"
+	"api/src/rt/admin"
+	"api/src/rt/auth"
+	"api/src/rt/prf"
+	"api/src/rt/srch"
 	"log/slog"
 	"os"
 	"time"
@@ -39,13 +41,15 @@ func InitChiRouting() {
 	// public Routes
 	r.Group(func(r chi.Router) {
 		r.Post("/signup", auth.Register) // register
-		r.Post("/signin", auth.Login)     // signin
+		r.Post("/signin", auth.Login)    // signin
+		r.Get("/search", srch.Search)
 	})
 
 	// Private Routes
 	// Require Authentication
 	r.Group(func(r chi.Router) {
 		r.Use(auth.AuthMiddleware)
+		r.Get("/profile", prf.Profile)
 		r.Get("/allUsers", admin.GetAllUser) // all users get
 	})
 
