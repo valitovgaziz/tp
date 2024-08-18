@@ -17,7 +17,7 @@ var jwtKey = []byte(os.Getenv("SECRET_KEY"))
 func Login(w http.ResponseWriter, r *http.Request) {
 	var creds models.Crenetials
 	if err := json.NewDecoder(r.Body).Decode(&creds); err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
+		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
 	// check user
