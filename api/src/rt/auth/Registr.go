@@ -12,15 +12,15 @@ import (
 )
 
 func Register(w http.ResponseWriter, r *http.Request) {
-	var Crenetials models.Crenetials
+	var Credentials models.Credentials
 	// Decoe body
-	if err := json.NewDecoder(r.Body).Decode(&Crenetials); err != nil {
+	if err := json.NewDecoder(r.Body).Decode(&Credentials); err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
 
 	// shep password
-	hashedPassword, err := hashPassword(Crenetials.Password)
+	hashedPassword, err := hashPassword(Credentials.Password)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
@@ -30,10 +30,10 @@ func Register(w http.ResponseWriter, r *http.Request) {
 
 	user := models.User{
 		Id:       id,
-		Name:     Crenetials.Name,
-		Email:    Crenetials.Email,
+		Name:     Credentials.Name,
+		Email:    Credentials.Email,
 		Password: hashedPassword,
-		Phone:    Crenetials.Phone,
+		Phone:    Credentials.Phone,
 	}
 	if result := psql.PSQL_GORM_DB.Create(&user); result.Error != nil {
 		w.WriteHeader(http.StatusInternalServerError)

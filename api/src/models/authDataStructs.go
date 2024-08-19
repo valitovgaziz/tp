@@ -4,7 +4,7 @@ import (
 	"github.com/golang-jwt/jwt/v4"
 )
 
-type Crenetials struct {
+type Credentials struct {
 	Name     string `json:"name"`
 	Email    string `json:"email"`
 	Password string `json:"password"`
@@ -14,4 +14,5 @@ type Crenetials struct {
 type Claims struct {
 	jwt.RegisteredClaims
 	Email string `json:"email"`
+	Phone string `json:"phone"`
 }

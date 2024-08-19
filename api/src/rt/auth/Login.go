@@ -15,14 +15,16 @@ import (
 var jwtKey = []byte(os.Getenv("SECRET_KEY"))
 
 func Login(w http.ResponseWriter, r *http.Request) {
-	var creds models.Crenetials
+	var creds models.Credentials
 	if err := json.NewDecoder(r.Body).Decode(&creds); err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
 	// check user
 	var user models.User
-	if result := psql.PSQL_GORM_DB.Where("email = ?", creds.Email).First(&user); result.Error != nil || !checkPasswordHash(creds.Password, user.Password) {
+	// get user by email
+	result := psql.PSQL_GORM_DB.Where("email = ?", creds.Email).First(&user)
+	if result.Error != nil || !checkPasswordHash(creds.Password, user.Password) {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
@@ -34,6 +36,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 			ExpiresAt: jwt.NewNumericDate(expirationtime),
 		},
 		Email: user.Email,
+		Phone: user.Phone,
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
