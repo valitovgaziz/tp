@@ -50,7 +50,11 @@ func InitChiRouting() {
 	r.Group(func(r chi.Router) {
 		r.Use(auth.AuthMiddleware)
 		r.Get("/profile", prf.Profile)
-		r.Get("/allUsers", admin.GetAllUser) // all users get
+		r.Get("/allUsersAdm", admin.GetAllUser)
+		r.Route("/admin", func(r chi.Router) {
+			r.Use(auth.AuthAdminMiddleware)
+			r.Get("/allUsersAdm", admin.GetAllUser) // all users get
+		})
 	})
 
 	// up server on os.Getenv("SERVER_PORT") port on gorutin

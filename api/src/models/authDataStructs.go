@@ -15,4 +15,5 @@ type Claims struct {
 	jwt.RegisteredClaims
 	Email string `json:"email"`
 	Phone string `json:"phone"`
+	Role  string `json:"role"`
 }
