@@ -8,4 +8,5 @@ type User struct {
 	Email    string    `json:"email" gorm:"type:string;index"`
 	Password string    `json:"password" gorm:"type:string;index"`
 	Phone    string    `json:"phone" gorm:"type:string;index"`
+	Role     string    `json:"role" gorm:"type:string;index"`
 }
