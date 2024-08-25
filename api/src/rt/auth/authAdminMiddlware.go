@@ -40,7 +40,7 @@ func AuthAdminMiddleware(next http.Handler) http.Handler {
 			return
 		}
 
-		if claims.Role != "Admin" {
+		if claims.Role != "admin" {
 			w.WriteHeader(http.StatusNonAuthoritativeInfo)
 			return
 		}

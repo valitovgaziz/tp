@@ -34,8 +34,10 @@ func Register(w http.ResponseWriter, r *http.Request) {
 		Email:    Credentials.Email,
 		Password: hashedPassword,
 		Phone:    Credentials.Phone,
+		Role:     Credentials.Role,
 	}
-	if result := psql.PSQL_GORM_DB.Create(&user); result.Error != nil {
+	result := psql.PSQL_GORM_DB.Create(&user)
+	if result.Error != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}

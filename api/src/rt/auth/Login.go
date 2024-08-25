@@ -37,6 +37,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		},
 		Email: user.Email,
 		Phone: user.Phone,
+		Role:  user.Role,
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
