@@ -9,5 +9,5 @@ type Essence struct {
 	Contact          Contact   `json:"contact" gorm:"type:struct"`
 	ShortDescription string    `json:"shortDesc" gorm:"type:string"`
 	Description      string    `json:"description" gorm:"type:string"`
-	AverageBill string `json`
+	AverageBill      int       `json:"number" gorm:"type:int"`
 }
