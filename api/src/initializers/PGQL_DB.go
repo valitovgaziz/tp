@@ -11,7 +11,6 @@ import (
 	"gorm.io/gorm/logger"
 )
 
-
 func InitDBconnection() {
 	slog.Info("Init DB connection")
 	dsn := fmt.Sprintf(
