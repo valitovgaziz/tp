@@ -46,6 +46,8 @@ services:
       dockerfile: Dockerfile
     env_file:
       - .env
+    ports:
+      - "${INNERPORT}:${OUTERPORT}"
     depends_on:
       - api
       - db
