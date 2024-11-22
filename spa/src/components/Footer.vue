@@ -8,7 +8,7 @@
           <li><a href="#donates">Донаты</a></li>
         </ul>
       </nav>
-      <p class="copyright">© Все права защищены, 2023</p>
+      <p class="copyright">© Все права защищены, 2024</p>
     </footer>
   </template>
   
