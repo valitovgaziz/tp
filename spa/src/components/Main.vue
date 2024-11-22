@@ -1,10 +1,14 @@
 <template>
     <div class="content-wrapper" :class="{ centered: isCentered }">
-      <slot></slot>
+      <slot>
+        <SearchBar />
+      </slot>
     </div>
   </template>
   
   <script>
+  import SearchBar from './SearchBar.vue';
+
   export default {
     name: 'ContentWrapper',
     props: {
@@ -13,9 +17,13 @@
         type: Boolean,
         default: true
       }
+    },
+    components: {
+        SearchBar
     }
   };
   </script>
+
   
   <style scoped>
   .content-wrapper {
@@ -23,7 +31,7 @@
     flex-direction: column;
     justify-content: flex-start; /* Выравниваем контент к верху */
     align-items: stretch;
-    min-height: 100vh; /* Если нужно растянуть контейнер на всю высоту экрана */
+    min-height: 80vh; /* Если нужно растянуть контейнер на всю высоту экрана */
   }
   
   .centered {
