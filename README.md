@@ -1,4 +1,8 @@
 # RESTfull API on Golang.
+
+make
+    for build and start app. Before your are must set .env settings.
+
 TODO LIST
 
 *Настроить авторизацию по уровню доступа.

@@ -47,7 +47,7 @@ services:
     env_file:
       - .env
     ports:
-      - "${INNERPORT}:${OUTERPORT}"
+      - "${OUTERPORT}:${INNERPORT}"
     depends_on:
       - api
       - db
