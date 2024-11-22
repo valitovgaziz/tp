@@ -2,12 +2,14 @@
     <div class="content-wrapper" :class="{ centered: isCentered }">
       <slot>
         <SearchBar />
+        <SearchResults />
       </slot>
     </div>
   </template>
   
   <script>
   import SearchBar from './SearchBar.vue';
+  import SearchResults from './SearchResults.vue';
 
   export default {
     name: 'ContentWrapper',
@@ -19,7 +21,8 @@
       }
     },
     components: {
-        SearchBar
+        SearchBar,
+        SearchResults
     }
   };
   </script>
