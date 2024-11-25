@@ -20,7 +20,8 @@
     },
     methods: {
       onSubmit() {
-        this.$emit('submit', this.searchQuery);
+        this.$emit('submited', this.searchQuery);
+
       }
     }
   };

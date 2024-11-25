@@ -1,8 +1,7 @@
 <template>
-  <div class="search-results">
+  <div  v-show="showContent" class="search-results">
     <h2>Результаты поиска</h2>
-    <div v-if="results.length === 0">Нет результатов</div>
-    <div v-else class="results-container">
+    <div class="results-container">
       <SearchResultCard v-for="result in results" :key="result.id" :result="result" />
     </div>
   </div>
@@ -12,6 +11,11 @@
 import SearchResultCard from "./SearchResultCard.vue";
 
 export default {
+  data() {
+    return {
+      showContent: false,
+    };
+  },
   name: "SearchResults",
   components: {
     SearchResultCard,
@@ -23,6 +27,7 @@ export default {
     },
   },
 };
+
 </script>
 
 <style scoped>

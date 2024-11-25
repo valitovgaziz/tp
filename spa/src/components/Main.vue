@@ -1,8 +1,8 @@
 <template>
     <div class="content-wrapper" :class="{ centered: isCentered }">
       <slot>
-        <SearchBar />
-        <SearchResults />
+        <SearchBar @submited="queryStr" />
+        <SearchResults ref="sdf" />
       </slot>
     </div>
   </template>
@@ -23,6 +23,29 @@
     components: {
         SearchBar,
         SearchResults
+    },
+    methods: {
+        queryStr(searchQuery) {
+            alert(this.$refs.sdf)
+            this.isCentered = false;
+            this.$refs.searchResultsRef.showContent = true;
+            this.$refs.searchResultsRef.results = [
+                {
+                    "id": "asldfjk",
+                    "title": "title1",
+                    "description": "long description about this result"
+                },
+                {
+                    "id": "asladsdfjk",
+                    "title": "title2",
+                    "description": "long description about this result" 
+                },{
+                    "id": "asldfasdfjk",
+                    "title": "title3",
+                    "description": "long description about this result"
+                }
+            ];
+        }
     }
   };
   </script>
