@@ -22,7 +22,7 @@ services:
     ports:
       - "${SERVER_PORT}:${SERVER_PORT}"
     volumes:
-      - .:/usr/src/app
+      - api:/usr/src/app
     depends_on:
       - db
     command: ./bin/api.exe
@@ -54,5 +54,6 @@ services:
       - migrator
 
 volumes:
+  api:
   postgres-db:
   goose:
