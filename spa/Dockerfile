@@ -5,6 +5,7 @@ FROM node:lts-alpine as builder
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
+RUN npm install axios
 
 # Копируем исходный код
 COPY . .
