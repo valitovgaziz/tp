@@ -11,7 +11,7 @@
         
         <ul v-show="isOpen" class="menu-list">
           <li v-for="item in menuItems" :key="item.id">
-            <a href="#">{{ item.title }}</a>
+            <router-link :to="item.tooo">{{ item.id }} - {{ item.title }}</router-link>
           </li>
         </ul>
       </div>
@@ -25,11 +25,12 @@
       return {
         isOpen: false,
         menuItems: [
-          { id: 1, title: 'Главная' },
-          { id: 2, title: 'О нас' },
-          { id: 3, title: 'Услуги' },
-          { id: 4, title: 'Контакты' },
-          { id: 5, title: 'Блог' }
+          { id: 1, title: 'Главная', tooo: 'home' },
+          { id: 2, title: 'О нас', tooo: 'about' },
+          { id: 3, title: 'Услуги', tooo: 'home' },
+          { id: 4, title: 'Контакты', tooo: 'home' },
+          { id: 5, title: 'Блог', tooo: 'home' },
+          { id: 6, title: 'SignUp', tooo: 'signup' }
         ]
       };
     }
