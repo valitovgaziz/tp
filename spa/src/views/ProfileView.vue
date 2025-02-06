@@ -1,22 +1,22 @@
 <template>
   <Header />
-  <SearchLine />
+  <Profile />
   <Footer />
 </template>
 
 
-<style src="../assets/main.css"></style>
+<style></style>
 
 <script>
 import Header from '../components/header/header.vue';
 import Footer from '../components/footer.vue';
-import SearchLine from '../components/searchLine/searchLine.vue';
+import Profile from '../components/profile.vue';
 
 export default {
   components: {
     Header,
     Footer,
-    SearchLine,
+    Profile,
   },
 };
 </script>

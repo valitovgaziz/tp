@@ -9,12 +9,19 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.5.12",
-    "vue-router": "^4.4.5"
+    "axios": "^1.7.9",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "pg": "^8.13.1",
+    "spa": "file:",
+    "vue": "^3.5.13",
+    "vue-material-design-icons": "^5.3.1",
+    "vue-router": "^4.5.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.1.4",
-    "vite": "^5.4.10",
-    "vite-plugin-vue-devtools": "^7.5.4"
+    "@vitejs/plugin-vue": "^5.2.1",
+    "vite": "^6.0.5",
+    "vite-plugin-vue-devtools": "^7.6.8"
   }
 }
