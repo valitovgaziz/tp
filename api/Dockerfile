@@ -6,6 +6,6 @@ COPY . .
 
 RUN go mod tidy
 
-RUN go build -o bin/api.exe cmd/main.go
+RUN go build -o bin/api cmd/main.go
 
-ENTRYPOINT [ "bin/api.exe" ]
+ENTRYPOINT [ "bin/api" ]

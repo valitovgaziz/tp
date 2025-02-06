@@ -1,7 +1,7 @@
 build:
 	@docker compose build
 
-run: build
+run:
 	@docker compose up
 
 clean:
